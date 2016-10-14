@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-info",
+  "description": "Node info on package, os, process memory, versions, environment, request",
+  "version": "1.0.0",
+  "main": "nodeinfo.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisveness/nodejs-info"
+  },
+  "author": "Chris Veness",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "dependencies": {
+    "cookie": "^0.3.1",
+    "handlebars": "^4.0.5",
+    "humanize-duration": "^3.9.1",
+    "prettysize": "0.0.3"
+  }
+}
