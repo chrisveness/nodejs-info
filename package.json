@@ -2,7 +2,7 @@
   "name": "nodejs-info",
   "description": "Node info on package, os, process memory, versions, environment, request",
   "version": "1.0.0",
-  "main": "nodeinfo.js",
+  "main": "nodejs-info.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/chrisveness/nodejs-info"
