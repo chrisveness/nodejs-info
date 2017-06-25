@@ -89,10 +89,10 @@ const template = `<!doctype html>
         {{#each request.headers}}
         <tr><td style="white-space:nowrap">{{@key}}</td><td>{{this}}</td></tr>
         {{/each}}
-        <tr><td>cookies</td><td style="overflow:auto">
+        <tr><td>cookies</td><td>
             <table>
                 {{#each request.cookies}}
-                <tr><td>{{@key}}</td><td>:</td><td style="overflow:auto">{{this}}</td></tr>
+                <tr><td>{{@key}}</td><td>:</td><td style="word-break:break-all">{{this}}</td></tr>
                 {{/each}}
             </table>
         </td></tr>
