@@ -68,17 +68,12 @@ const template = `<!doctype html>
         <tr><td>v8 heap used</td><td>{{process.heapUsed}}</td></tr>
 
         <tr><td colspan="2"><h2>Node versions</h2></td></tr>
-        <tr><td>node</td><td>{{process.versions.node}}</td></tr>
-        <tr><td>v8</td><td>{{process.versions.v8}}</td></tr>
-        <tr><td>uv</td><td>{{process.versions.uv}}</td></tr>
-        <tr><td>zlib</td><td>{{process.versions.zlib}}</td></tr>
-        <tr><td>ares</td><td>{{process.versions.ares}}</td></tr>
-        <tr><td>modules</td><td>{{process.versions.modules}}</td></tr>
-        <tr><td>openssl</td><td>{{process.versions.openssl}}</td></tr>
-        <tr><td>http_parser<td>{{process.versions.http_parser}}</td></tr>
+        {{#each process.versions}}
+        <tr><td>{{@key}}</td><td>{{this}}</td></tr>
+        {{/each}}
 
         {{#if process.env.NODE_ENV}}
-        <tr><td colspan="2"><h2>Environment</h2></td></tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
         <tr><td>NODE_ENV</td><td>{{process.env.NODE_ENV}}</td></tr>
         {{/if}}
 
@@ -124,13 +119,14 @@ function nodeinfo(req, options) {
     const opt = Object.assign(defaults, options);
 
     const context = {};
-    
+
+    context.styleOverride = opt.style;
+
+    // package.dependencies
     context.package = packageJson ? Object.assign({}, packageJson) : null;
     if (context.package && context.package.dependencies) { // convert dependencies to list
         context.package.dependencies = Object.keys(context.package.dependencies).join(', ');
     }
-
-    context.styleOverride = opt.style;
 
     // all function calls from 'os'
     context.os = {};
@@ -166,8 +162,8 @@ function nodeinfo(req, options) {
         context.request = req;
         context.request.href = protocol + '://' + req.headers.host + req.url;
         // IP address: stackoverflow.com/questions/8107856
-        context.request.ip = req.headers['x-forwarded-for'] 
-            || req.connection.remoteAddress 
+        context.request.ip = req.headers['x-forwarded-for']
+            || req.connection.remoteAddress
             || req.socket.remoteAddress
             || req.connection.socket.remoteAddress;
 
