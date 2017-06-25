@@ -168,7 +168,7 @@ function nodeinfo(req, options) {
             || req.connection.socket.remoteAddress;
 
         // cookies go in separate nested table
-        context.request.cookies = cookie.parse(req.headers.cookie);
+        context.request.cookies = req.headers.cookie ? cookie.parse(req.headers.cookie) : {};
         delete context.request.headers.cookie;
     }
 
