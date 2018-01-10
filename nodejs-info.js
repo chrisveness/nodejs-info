@@ -1,5 +1,5 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-/* nodeinfo()                                                  (c) Chris Veness 2016 MIT Licence  */
+/* nodeinfo()                                             (c) Chris Veness 2016-2018 MIT Licence  */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 'use strict';
@@ -130,7 +130,7 @@ function nodeinfo(req, options) {
 
     // all function calls from 'os'
     context.os = {};
-    for (const m in os) { if (typeof os[m]=='function') context.os[m] = os[m](); }
+    for (const m in os) { if (typeof os[m]=='function' && os[m].name!='deprecated') context.os[m] = os[m](); }
     // and some formatting
     context.os.uptime = humanizeDuration(context.os.uptime*1000, { units: ['d', 'h', 'm'], round: true });
     context.os.loadavg.forEach(function(l, i, loadavg) { loadavg[i] = l.toFixed(2); });
