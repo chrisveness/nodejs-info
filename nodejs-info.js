@@ -128,11 +128,12 @@ function nodeinfo(req, options) {
         context.package.dependencies = Object.keys(context.package.dependencies).join(', ');
     }
 
-    // all function calls from 'os'
-    context.os = {};
-    for (const m in os) { if (typeof os[m]=='function' && os[m].name!='deprecated') context.os[m] = os[m](); }
+    // useful functions from 'os'
+    const osFunctions = [ 'cpus', 'freemem', 'hostname', 'loadavg', 'platform', 'release', 'totalmem', 'type', 'uptime' ];
+    context.os = {}; // results of executing os functions
+    for (const fn of osFunctions) { context.os[fn] = os[fn](); }
     // and some formatting
-    context.os.uptime = humanizeDuration(context.os.uptime*1000, { units: ['d', 'h', 'm'], round: true });
+    context.os.uptime = humanizeDuration(context.os.uptime*1000, { units: [ 'd', 'h', 'm' ], round: true });
     context.os.loadavg.forEach(function(l, i, loadavg) { loadavg[i] = l.toFixed(2); });
     context.os.loadavg = context.os.loadavg.join(' ');
     context.os.freemempercent = Math.round(context.os.freemem/context.os.totalmem*100);
