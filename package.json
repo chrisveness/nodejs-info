@@ -1,7 +1,8 @@
 {
   "name": "nodejs-info",
-  "description": "Node info on package, os, process memory, versions, environment, request",
-  "version": "1.1.2",
+  "description": "Node info on package, os, process memory, timezone, versions, environment, request",
+  "keywords": [ "node", "info", "package", "os", "process", "memory", "timezone", "versions", "environment", "request" ],
+  "version": "1.2.0",
   "main": "nodejs-info.js",
   "repository": {
     "type": "git",
@@ -15,7 +16,7 @@
   "dependencies": {
     "cookie": "^0.3.1",
     "handlebars": "^4.0.12",
-    "humanize-duration": "^3.15.2",
+    "humanize-duration": "^3.15.3",
     "prettysize": "1.1.0"
   }
 }
