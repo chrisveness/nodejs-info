@@ -66,6 +66,9 @@ const template = `<!doctype html>
         <tr><td>resident set size</td><td>{{process.rss}}</td></tr>
         <tr><td>v8 heap total</td><td>{{process.heapTotal}}</td></tr>
         <tr><td>v8 heap used</td><td>{{process.heapUsed}}</td></tr>
+        <tr><td colspan="2"><h3>timezone</h3></td></tr>
+        <tr><td>timezone</td><td>{{intlTimezone}}</td></tr>
+        <tr><td>offset</td><td>{{dateTzOffset}}</td></tr>
 
         <tr><td colspan="2"><h2>Node versions</h2></td></tr>
         {{#each process.versions}}
@@ -157,6 +160,9 @@ function nodeinfo(req, options) {
     context.process.rss = prettysize(process.memoryUsage().rss);
     context.process.heapTotal = prettysize(process.memoryUsage().heapTotal);
     context.process.heapUsed = prettysize(process.memoryUsage().heapUsed);
+
+    context.intlTimezone = Intl.DateTimeFormat('en').resolvedOptions().timeZone;
+    context.dateTzOffset = Date().match(/([A-Z]+[\+-][0-9]{4}.*)/)[1];
 
     if (req.headers) {
         const protocol = req.socket.encrypted || req.headers['x-forwarded-proto']=='https' ? 'https' : 'http';
