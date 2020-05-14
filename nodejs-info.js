@@ -1,5 +1,5 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-/* nodeinfo()                                             (c) Chris Veness 2016-2018 MIT Licence  */
+/* nodeinfo()                                             (c) Chris Veness 2016-2020 MIT Licence  */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 'use strict';
@@ -84,7 +84,7 @@ const template = `<!doctype html>
         <tr><td colspan="2"><h2>Request</h2></td></tr>
         <tr><td>method</td><td>{{request.method}}</td></tr>
         <tr><td>href</td><td>{{request.href}}</td></tr>
-        <tr><td>ip</td><td>{{request.ip}}</td></tr>
+        <tr><td>remote ip</td><td>{{request.ip_addr}}</td></tr>
         <tr><td colspan="2"><h3>headers</h3></td></tr>
         {{#if request.showOriginalUrl}}
         <tr><td>original url</td><td>{{request.originalUrl}}</td></tr>
@@ -167,9 +167,9 @@ function nodeinfo(req, options) {
     if (req.headers) {
         const protocol = req.socket.encrypted || req.headers['x-forwarded-proto']=='https' ? 'https' : 'http';
         context.request = req;
+        // add in href & remote IP address (stackoverflow.com/questions/8107856)
         context.request.href = protocol + '://' + req.headers.host + req.url;
-        // IP address: stackoverflow.com/questions/8107856
-        context.request.ip = req.headers['x-forwarded-for']
+        context.request.ip_addr = req.headers['x-forwarded-for']
             || req.connection.remoteAddress
             || req.socket.remoteAddress
             || req.connection.socket.remoteAddress;

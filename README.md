@@ -19,18 +19,33 @@ Example usage (Node)
         res.end(nodeinfo(req));
     });
     
-    server.listen(8080);
+    server.listen(3000, () => console.log('Listening on port 3000'));
+
+Example usage (Express)
+
+    const express  = require('express');
+    const nodeinfo = require('nodejs-info');
+
+    const app = express();
+
+    app.get('/', (req, res) => {
+        res.send(nodeinfo(req));
+    });
+
+    app.listen(3000, () => console.log('Listening on port 3000'));
 
 Example usage (Koa)
 
-    const app      = require('koa');
+    const Koa      = require('koa');
     const nodeinfo = require('nodejs-info');
+
+    const app = new Koa();
 
     app.use(ctx => {
         ctx.body = nodeinfo(ctx.req);
     });
-    
-    app.listen(3000);
+
+    app.listen(3000, () => console.log('Listening on port 3000'));
 
 CSS styling can be provided via the optional `style` parameter.
 
