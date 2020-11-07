@@ -169,10 +169,13 @@ function nodeinfo(req, options) {
         context.request = req;
         // add in href & remote IP address (stackoverflow.com/questions/8107856)
         context.request.href = protocol + '://' + req.headers.host + req.url;
-        context.request.ip_addr = req.headers['x-forwarded-for']
-            || req.connection.remoteAddress
+        const remoteAddr = req.connection.remoteAddress
             || req.socket.remoteAddress
             || req.connection.socket.remoteAddress;
+        const ipAddr = req.headers['x-forwarded-for']
+            ? `${req.headers['x-forwarded-for']} via ${remoteAddr}`
+            : remoteAddr;
+        context.request.ip_addr = ipAddr;
 
         // cookies go in separate nested table
         context.request.cookies = req.headers.cookie ? cookie.parse(req.headers.cookie) : {};
