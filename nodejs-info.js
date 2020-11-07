@@ -23,7 +23,7 @@ const template = `<!doctype html>
     <title>NodeInfo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/4.1.0/sanitize.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
     <style>
         main { color: #333333; font: 80% Verdana, Arial, Helvetica, sans-serif; line-height: 1.6; margin: 0.4em; }
         h1 { font-size: 1.6em; }
