@@ -31,8 +31,9 @@ const template = `<!doctype html>
         h3 { margin: 0.4em 0; }
         table { background-color: #f4ede2; border: 1px solid #adadad; font-size: 0.8em; width: 100%; }
         td, th { padding: 0.2em 0.8em; vertical-align: top; border-top: 1px solid #adadad; border-bottom: 1px solid #adadad; }
+        th { font-weight: normal; text-align: left; white-space: nowrap;  }
         table table { border: none; }
-        table table td { padding: 0 0.4em 0 0; border: none; font-size: 125%; }
+        table table td, table table th { padding: 0 0.4em 0 0; border: none; font-size: 125%; }
         {{{styleOverride}}}
     </style>
 </head>
@@ -41,66 +42,66 @@ const template = `<!doctype html>
     <h1>Node.js {{process.version}}</h1>
     <table>
         {{#if package}}
-        <tr><td colspan="2"><h2>Package</h2></td></tr>
-        <tr><td>name</td><td>{{package.name}}</td></tr>
+        <tr><th colspan="2"><h2>Package</h2></th></tr>
+        <tr><th>name</th><td>{{package.name}}</td></tr>
         {{#if package.description}}
-        <tr><td>description</td><td>{{package.description}}</td></tr>
+        <tr><th>description</th><td>{{package.description}}</td></tr>
         {{/if}}
-        <tr><td>version</td><td>{{package.version}}</td></tr>
+        <tr><th>version</th><td>{{package.version}}</td></tr>
         {{#if package.dependencies}}
-        <tr><td>dependencies</td><td>{{package.dependencies}}</td></tr>
+        <tr><th>dependencies</th><td>{{package.dependencies}}</td></tr>
         {{/if}}
         {{/if}}
-        <tr><td colspan="2"><h2>OS</h2></td></tr>
-        <tr><td>hostname</td><td>{{os.hostname}}</td></tr>
-        <tr><td>type</td><td>{{os.type}}</td></tr>
-        <tr><td>platform</td><td>{{os.platform}}</td></tr>
-        <tr><td>release</td><td>{{os.release}}</td></tr>
-        <tr><td>cpu models</td><td>{{os.cpus.model}}</td></tr>
-        <tr><td>cpu speeds</td><td>{{os.cpus.speed}}</td></tr>
-        <tr><td>uptime</td><td>{{os.uptime}}</td></tr>
-        <tr><td>load avg</td><td>{{os.loadavg}}</td></tr>
-        <tr><td>total memory</td><td>{{os.totalmem}}</td></tr>
-        <tr><td>free memory</td><td>{{os.freemem}} ({{os.freemempercent}}%)</td></tr>
-        <tr><td colspan="2"><h3>process</h3></td></tr>
-        <tr><td>resident set size</td><td>{{process.rss}}</td></tr>
-        <tr><td>v8 heap total</td><td>{{process.heapTotal}}</td></tr>
-        <tr><td>v8 heap used</td><td>{{process.heapUsed}}</td></tr>
-        <tr><td colspan="2"><h3>timezone</h3></td></tr>
-        <tr><td>timezone</td><td>{{intlTimezone}}</td></tr>
-        <tr><td>offset</td><td>{{dateTzOffset}}</td></tr>
+        <tr><th colspan="2"><h2>OS</h2></th></tr>
+        <tr><th>hostname</th><td>{{os.hostname}}</td></tr>
+        <tr><th>type</th><td>{{os.type}}</td></tr>
+        <tr><th>platform</th><td>{{os.platform}}</td></tr>
+        <tr><th>release</th><td>{{os.release}}</td></tr>
+        <tr><th>cpu models</th><td>{{os.cpus.model}}</td></tr>
+        <tr><th>cpu speeds</th><td>{{os.cpus.speed}}</td></tr>
+        <tr><th>uptime</th><td>{{os.uptime}}</td></tr>
+        <tr><th>load avg</th><td>{{os.loadavg}}</td></tr>
+        <tr><th>total memory</th><td>{{os.totalmem}}</td></tr>
+        <tr><th>free memory</th><td>{{os.freemem}} ({{os.freemempercent}}%)</td></tr>
+        <tr><th colspan="2"><h3>process</h3></th></tr>
+        <tr><th>resident set size</th><td>{{process.rss}}</td></tr>
+        <tr><th>v8 heap total</th><td>{{process.heapTotal}}</td></tr>
+        <tr><th>v8 heap used</th><td>{{process.heapUsed}}</td></tr>
+        <tr><th colspan="2"><h3>timezone</h3></th></tr>
+        <tr><th>timezone</th><td>{{intlTimezone}}</td></tr>
+        <tr><th>offset</th><td>{{dateTzOffset}}</td></tr>
 
-        <tr><td colspan="2"><h2>Node versions</h2></td></tr>
+        <tr><th colspan="2"><h2>Node versions</h2></th></tr>
         {{#each process.versions}}
-        <tr><td>{{@key}}</td><td>{{this}}</td></tr>
+        <tr><th>{{@key}}</th><td>{{this}}</td></tr>
         {{/each}}
 
         {{#if process.env.NODE_ENV}}
-        <tr><td colspan="2">&nbsp;</td></tr>
-        <tr><td>NODE_ENV</td><td>{{process.env.NODE_ENV}}</td></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th>NODE_ENV</th><td>{{process.env.NODE_ENV}}</td></tr>
         {{/if}}
 
         {{#if request}}
-        <tr><td colspan="2"><h2>Request</h2></td></tr>
-        <tr><td>method</td><td>{{request.method}}</td></tr>
-        <tr><td>href</td><td>{{request.href}}</td></tr>
-        <tr><td>remote ip</td><td>{{request.ip_addr}}</td></tr>
-        <tr><td colspan="2"><h3>headers</h3></td></tr>
+        <tr><th colspan="2"><h2>Request</h2></th></tr>
+        <tr><th>method</th><td>{{request.method}}</td></tr>
+        <tr><th>href</th><td>{{request.href}}</td></tr>
+        <tr><th>remote ip</th><td>{{request.ip_addr}}</td></tr>
+        <tr><th colspan="2"><h3>headers</h3></th></tr>
         {{#if request.showOriginalUrl}}
-        <tr><td>original url</td><td>{{request.originalUrl}}</td></tr>
+        <tr><th>original url</th><td>{{request.originalUrl}}</td></tr>
         {{/if}}
         {{#each request.headers}}
-        <tr><td style="white-space:nowrap">{{@key}}</td><td>{{this}}</td></tr>
+        <tr><th style="white-space:nowrap">{{@key}}</th><td>{{this}}</td></tr>
         {{/each}}
-        <tr><td>cookies</td><td>
+        <tr><th>cookies</th><td>
             <table>
                 {{#each request.cookies}}
-                <tr><td>{{@key}}</td><td>:</td><td style="word-break:break-all">{{this}}</td></tr>
+                <tr><th>{{@key}}</th><td>:</td><td style="word-break:break-all">{{this}}</td></tr>
                 {{/each}}
             </table>
         </td></tr>
         {{else}}
-        <tr><td colspan="2"><h2>No request object supplied</h2></td></tr>
+        <tr><th colspan="2"><h2>No request object supplied</h2></th></tr>
         {{/if}}
     </table>
 </main>
